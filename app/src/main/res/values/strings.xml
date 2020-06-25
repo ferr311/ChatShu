@@ -2,4 +2,15 @@
     <string name="app_name">Chat Shu</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings_username">Какой-то пользователь</string>
+    <string name="settings_status">В сети</string>
+    <string name="settings_text_account">Аккаунт</string>
+    <string name="settings_default_number">+79261828995</string>
+    <string name="settings_phone_number_label">Нажмите, чтобы изменить номер телефона</string>
+    <string name="settings_default_login">MyLogin</string>
+    <string name="settings_label_login">Имя пользователя</string>
+    <string name="settings_default_bio">О Себе</string>
+    <string name="settings_label_bio">Напишите о себе</string>
+    <string name="settings_menu_change_name">Изменить имя</string>
+    <string name="settings_menu_exit">Выход</string>
 </resources>
