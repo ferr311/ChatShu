@@ -13,6 +13,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.ui.fragments.SettingsFragment
+import com.shukhaev.chatshu.utils.replaceFragment
 
 class AppDrawer(val mainActivity: AppCompatActivity, private val toolbar: Toolbar) {
 
@@ -86,11 +87,7 @@ class AppDrawer(val mainActivity: AppCompatActivity, private val toolbar: Toolba
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
                     when (position) {
-                        7 -> mainActivity.supportFragmentManager.beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.dataContainer,
-                                SettingsFragment()
-                            ).commit()
+                        7 -> mainActivity.replaceFragment(SettingsFragment())
                     }
                     return false
                 }

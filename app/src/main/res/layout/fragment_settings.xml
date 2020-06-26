@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="@dimen/horizontal_margin"/>
         <TextView
-            android:id="@+id/settings_userName"
+            android:id="@+id/settings_fullName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/settings_user_photo"
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/settings_user_photo"
-            app:layout_constraintTop_toBottomOf="@+id/settings_userName"
+            app:layout_constraintTop_toBottomOf="@+id/settings_fullName"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="@dimen/horizontal_margin"
             android:textColor="@color/colorAccent"
@@ -94,19 +94,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/settingsButtons">
         <TextView
-            android:id="@+id/settings_text_login"
+            android:id="@+id/settings_text_userName"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/settings_default_login"
             style="@style/normalText" />
         <TextView
-            android:id="@+id/settings_text_label_login"
-            app:layout_constraintTop_toBottomOf="@id/settings_text_login"
+            android:id="@+id/settings_text_label_userName"
+            app:layout_constraintTop_toBottomOf="@id/settings_text_userName"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/settings_label_login"
             style="@style/smallText" />
         <View
-            app:layout_constraintTop_toBottomOf="@id/settings_text_label_login"
+            app:layout_constraintTop_toBottomOf="@id/settings_text_label_userName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/separator" />
