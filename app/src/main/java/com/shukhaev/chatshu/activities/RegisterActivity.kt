@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.databinding.ActivityRegisterBinding
 import com.shukhaev.chatshu.ui.fragments.EnterPhoneNumberFragment
+import com.shukhaev.chatshu.utils.initFirebase
 import com.shukhaev.chatshu.utils.replaceFragment
 
 class RegisterActivity : AppCompatActivity() {
@@ -14,6 +15,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var mToolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        initFirebase()
         super.onCreate(savedInstanceState)
         mBinding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -24,6 +26,6 @@ class RegisterActivity : AppCompatActivity() {
         mToolbar = mBinding.registerToolbar
         setSupportActionBar(mToolbar)
         title = getString(R.string.register_title_your_phone)
-        replaceFragment(EnterPhoneNumberFragment())
+        replaceFragment(EnterPhoneNumberFragment(), false)
     }
 }

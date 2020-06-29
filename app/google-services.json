@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "657805259481",
+    "firebase_url": "https://chat-shu-new.firebaseio.com",
+    "project_id": "chat-shu-new",
+    "storage_bucket": "chat-shu-new.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657805259481:android:2d09638ad055310302c4c8",
+        "android_client_info": {
+          "package_name": "com.shukhaev.chatshu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657805259481-gdts10vsapr11epb0181n4p8t2c0phfe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD75OsB0FO8tosmt8MPw70ckBWwPsd6wqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657805259481-gdts10vsapr11epb0181n4p8t2c0phfe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
