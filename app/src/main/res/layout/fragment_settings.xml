@@ -35,7 +35,7 @@
             android:layout_marginStart="@dimen/horizontal_margin"
             android:textSize="@dimen/normal_text"
             android:textColor="@color/colorAccent"
-            android:text="@string/settings_username"/>
+            tools:text="@string/settings_username"/>
         <TextView
             android:id="@+id/settings_status"
             android:layout_width="0dp"
@@ -46,7 +46,7 @@
             android:layout_marginStart="@dimen/horizontal_margin"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/small_text"
-            android:text="@string/settings_status"/>
+            tools:text="@string/settings_status"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -73,7 +73,7 @@
             android:id="@+id/settings_text_phone_number"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/settings_default_number"
+            tools:text="@string/settings_default_number"
             style="@style/normalText" />
         <TextView
             android:id="@+id/settings_text_label_phone_number"
@@ -88,7 +88,7 @@
             style="@style/separator" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_btn_change_login"
+        android:id="@+id/settings_btn_change_username"
         app:layout_constraintTop_toBottomOf="@id/settings_btn_change_number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +97,7 @@
             android:id="@+id/settings_text_userName"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/settings_default_login"
+            tools:text="@string/settings_default_login"
             style="@style/normalText" />
         <TextView
             android:id="@+id/settings_text_label_userName"
@@ -113,7 +113,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_btn_change_bio"
-        app:layout_constraintTop_toBottomOf="@id/settings_btn_change_login"
+        app:layout_constraintTop_toBottomOf="@id/settings_btn_change_username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/settingsButtons">
@@ -121,7 +121,7 @@
             android:id="@+id/settings_text_bio"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/settings_default_bio"
+            tools:text="@string/settings_default_bio"
             style="@style/normalText" />
         <TextView
             android:id="@+id/settings_text_label_bio"
@@ -137,7 +137,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/settings_change_photo"
+        android:id="@+id/settings_btn_change_photo"
         android:layout_width="@dimen/settings_change_photo_width"
         android:layout_height="@dimen/settings_change_photo_height"
         android:src="@drawable/ic_camera"
