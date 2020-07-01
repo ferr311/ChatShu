@@ -21,13 +21,14 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.title = "Настройки"
         setHasOptionsMenu(true)
         initFields()
     }
 
     private fun initFields() {
         settings_fullName.text = USER.fullname
-        settings_status.text = USER.status
+        settings_status.text = USER.state
         settings_text_userName.text = USER.username
         settings_text_bio.text = USER.bio
         settings_text_phone_number.text = USER.phone

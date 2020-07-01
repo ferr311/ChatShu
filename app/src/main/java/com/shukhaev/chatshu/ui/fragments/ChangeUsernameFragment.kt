@@ -11,6 +11,7 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
 
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.title = "Изменить имя пользователя"
         settings_change_username_editText.setText(USER.username)
     }
 

@@ -8,10 +8,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.shukhaev.chatshu.MainActivity
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.activities.RegisterActivity
-import com.shukhaev.chatshu.utils.AUTH
-import com.shukhaev.chatshu.utils.replaceActivity
-import com.shukhaev.chatshu.utils.replaceFragment
-import com.shukhaev.chatshu.utils.showToast
+import com.shukhaev.chatshu.utils.*
 import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 import java.util.concurrent.TimeUnit
 
@@ -19,6 +16,10 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
 
     private lateinit var mPhoneNumber: String
     private lateinit var mCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+
+    override fun onResume() {
+        super.onResume()
+    }
 
 
     override fun onStart() {

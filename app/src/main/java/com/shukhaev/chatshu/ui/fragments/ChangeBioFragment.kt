@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.fragment_change_bio.*
 class ChangeBioFragment : BaseChangeFragment(R.layout.fragment_change_bio) {
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.title = "О себе"
         settings_change_bio_editText.setText(USER.bio)
     }
 

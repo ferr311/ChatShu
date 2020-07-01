@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.fragment_change_name.*
 class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
     override fun onResume() {
         super.onResume()
+        APP_ACTIVITY.title = "Изменить имя"
         initFullNameList()
     }
 
