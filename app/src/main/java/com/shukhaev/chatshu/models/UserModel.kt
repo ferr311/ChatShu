@@ -2,7 +2,7 @@ package com.shukhaev.chatshu.models
 
 import com.google.firebase.auth.PhoneAuthProvider
 
-data class User(
+data class UserModel(
     val id: String = "",
     var username: String = "",
     var bio: String = "",

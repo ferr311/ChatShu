@@ -6,6 +6,8 @@
     <color name="colorAccentDark">#d1cdcd</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#676464</color>
+    <color name="colorUserMessageBack">#A3DD94</color>
+    <color name="colorChatBackground">#93CEEC</color>
 
 
     <!-- Material DEFAULT colors -->

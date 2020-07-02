@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="@dimen/horizontal_margin"/>
+            android:layout_marginStart="@dimen/app_margin"/>
         <TextView
             android:id="@+id/settings_fullName"
             android:layout_width="0dp"
@@ -32,7 +32,7 @@
             app:layout_constraintStart_toEndOf="@+id/settings_user_photo"
             app:layout_constraintTop_toTopOf="@id/settings_user_photo"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginStart="@dimen/app_margin"
             android:textSize="@dimen/normal_text"
             android:textColor="@color/colorAccent"
             tools:text="@string/settings_username"/>
@@ -43,7 +43,7 @@
             app:layout_constraintStart_toEndOf="@+id/settings_user_photo"
             app:layout_constraintTop_toBottomOf="@+id/settings_fullName"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginStart="@dimen/app_margin"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/small_text"
             tools:text="@string/settings_status"/>
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/settings_header_bloc"
         android:layout_marginTop="@dimen/vertical_margin_large"
-        android:layout_marginStart="@dimen/horizontal_margin"
+        android:layout_marginStart="@dimen/app_margin"
         android:text="@string/settings_text_account"
         android:textColor="@color/primary"
         android:textSize="@dimen/small_text"
@@ -145,7 +145,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/settings_header_bloc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_header_bloc"
-        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:layout_marginEnd="@dimen/app_margin"
         app:civ_circle_background_color="@color/accent"/>
 
 
