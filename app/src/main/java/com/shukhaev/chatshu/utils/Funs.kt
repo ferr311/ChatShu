@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.models.CommonModel
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun showToast(message: String) {
     //функция показа сообщений
@@ -25,7 +27,7 @@ fun AppCompatActivity.replaceActivity(activity: AppCompatActivity) {
 }
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack: Boolean = true) {
-        //Запускает фрагменты из активити
+    //Запускает фрагменты из активити
     if (addStack) {
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
@@ -52,7 +54,7 @@ fun hideKeyboard() {
     imm.hideSoftInputFromWindow(APP_ACTIVITY.window.decorView.windowToken, 0)
 }
 
-fun ImageView.downloadAndSetImage(url:String){
+fun ImageView.downloadAndSetImage(url: String) {
     //скачивает и устанавливает картинку во вьюху , которая вызвала эту функцию
     Picasso.get()
         .load(url)
@@ -88,4 +90,11 @@ fun initContacts() {
         cursor?.close()
         updatePhonesToDatabase(arrayContacts)
     }
+}
+
+//форматирует время сервера Фаербэйс к стандартному виду
+ fun String.asTime(): String {
+    val time = Date(this.toLong())
+    val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return timeFormat.format(time)
 }

@@ -10,6 +10,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DatabaseReference
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.models.CommonModel
+import com.shukhaev.chatshu.ui.fragments.single_chat.SingleChatFragment
 import com.shukhaev.chatshu.utils.*
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.contact_item.view.*
@@ -33,6 +34,7 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
 
     override fun onResume() {
         super.onResume()
+        hideKeyboard()
         APP_ACTIVITY.title = "Контакты"
         initRecycleView()
     }
@@ -73,7 +75,11 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                     holder.status.text = contact.state
                     holder.photo.downloadAndSetImage(contact.photoUrl)
 
-                    holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(model)) }
+                    holder.itemView.setOnClickListener { replaceFragment(
+                        SingleChatFragment(
+                            model
+                        )
+                    ) }
                 }
 
                 mRefUsers.addValueEventListener(mRefUsersListener)

@@ -17,7 +17,7 @@
         android:background="@drawable/background_user_message">
 
         <TextView
-            android:id="@+id/message_item_user_text_message"
+            android:id="@+id/message_item_user_message_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/normalText"
@@ -35,7 +35,7 @@
             android:gravity="end"
             android:layout_marginEnd="@dimen/app_small_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message_item_user_text_message"/>
+            app:layout_constraintTop_toBottomOf="@+id/message_item_user_message_text"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -50,7 +50,7 @@
         android:background="@drawable/background_incoming_message">
 
         <TextView
-            android:id="@+id/message_item_incoming_text_message"
+            android:id="@+id/message_item_incoming_message_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/normalText"
@@ -68,7 +68,7 @@
             android:gravity="end"
             android:layout_marginEnd="@dimen/app_small_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message_item_incoming_text_message"/>
+            app:layout_constraintTop_toBottomOf="@+id/message_item_incoming_message_text"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

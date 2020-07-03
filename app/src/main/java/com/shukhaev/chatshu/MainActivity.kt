@@ -7,7 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.shukhaev.chatshu.activities.RegisterActivity
 import com.shukhaev.chatshu.databinding.ActivityMainBinding
-import com.shukhaev.chatshu.ui.fragments.ChatFragment
+import com.shukhaev.chatshu.ui.fragments.MainFragment
 import com.shukhaev.chatshu.ui.objects.AppDrawer
 import com.shukhaev.chatshu.utils.*
 import kotlinx.coroutines.CoroutineScope
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         if (AUTH.currentUser != null) {
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            replaceFragment(ChatFragment(), false)
+            replaceFragment(MainFragment(), false)
         } else {
             replaceActivity(RegisterActivity())
         }
