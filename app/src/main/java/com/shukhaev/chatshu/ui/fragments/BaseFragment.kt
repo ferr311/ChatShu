@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.shukhaev.chatshu.MainActivity
 import com.shukhaev.chatshu.utils.APP_ACTIVITY
 import java.util.zip.Inflater
-
+//Базовый фрагмент, от него наследуются все фрагменты кроме главного
 open class BaseFragment(private val layout: Int) : Fragment(layout) {
 
     override fun onStart() {
@@ -16,10 +16,4 @@ open class BaseFragment(private val layout: Int) : Fragment(layout) {
         APP_ACTIVITY.mAppDrawer.disableDrawer()
 
     }
-
-    override fun onStop() {
-        super.onStop()
-        APP_ACTIVITY.mAppDrawer.enableDrawer()
-    }
-
 }

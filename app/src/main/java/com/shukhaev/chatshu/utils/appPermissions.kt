@@ -10,6 +10,8 @@ const val READ_CONTACTS = Manifest.permission.READ_CONTACTS
 const val PERMISSION_REQUEST_CODE = 200
 
 fun checkPermission(permission: String): Boolean {
+    //функция принимает разрешения и проверяет. Если ещё небыло предоставлено,
+    // то запускает диалог с запросом
     return if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(
             APP_ACTIVITY,
             permission

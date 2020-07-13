@@ -3,18 +3,19 @@ package com.shukhaev.chatshu.ui.fragments.single_chat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.models.CommonModel
-import com.shukhaev.chatshu.utils.CURRENT_UID
+import com.shukhaev.chatshu.database.CURRENT_UID
+import com.shukhaev.chatshu.utils.DiffUtilCallback
 import com.shukhaev.chatshu.utils.asTime
 import kotlinx.android.synthetic.main.message_item.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolder>() {
 
-    private var mListMessagesCache = emptyList<CommonModel>()
+    private var mListMessagesCache = mutableListOf<CommonModel>()
+    private lateinit var mDiffResult: DiffUtil.DiffResult
 
     class SingleChatHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -51,11 +52,22 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
         }
     }
 
-    fun setList(list: List<CommonModel>) {
-        mListMessagesCache = list
-        notifyDataSetChanged()
+    fun addItemToBottom(item: CommonModel, onSuccess: () -> Unit) {
+        if (!mListMessagesCache.contains(item)) {
+            mListMessagesCache.add(item)
+            notifyItemInserted(mListMessagesCache.size)
+        }
+        onSuccess()
     }
 
+    fun addItemToTop(item: CommonModel, onSuccess: () -> Unit) {
+        if (!mListMessagesCache.contains(item)) {
+            mListMessagesCache.add(item)
+            mListMessagesCache.sortBy { it.timeStamp.toString() }
+            notifyItemInserted(0)
+        }
+        onSuccess()
+    }
 }
 
 

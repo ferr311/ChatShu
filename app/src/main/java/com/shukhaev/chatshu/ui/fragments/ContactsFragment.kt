@@ -9,6 +9,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DatabaseReference
 import com.shukhaev.chatshu.R
+import com.shukhaev.chatshu.database.*
 import com.shukhaev.chatshu.models.CommonModel
 import com.shukhaev.chatshu.ui.fragments.single_chat.SingleChatFragment
 import com.shukhaev.chatshu.utils.*
@@ -41,7 +42,9 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
 
     private fun initRecycleView() {
         mRecyclerView = contacts_recycler
-        mRefContacts = REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
+        mRefContacts = REF_DATABASE_ROOT.child(
+            NODE_PHONES_CONTACTS
+        ).child(CURRENT_UID)
 
         //настройка для адаптера, указываем какие данные и откуда получать
         val options = FirebaseRecyclerOptions.Builder<CommonModel>()
@@ -63,7 +66,9 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                 position: Int,
                 model: CommonModel
             ) {
-                mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS).child(model.id)
+                mRefUsers = REF_DATABASE_ROOT.child(
+                    NODE_USERS
+                ).child(model.id)
 
                 mRefUsersListener = AppValueEventListener {
                     val contact = it.getCommonModel()

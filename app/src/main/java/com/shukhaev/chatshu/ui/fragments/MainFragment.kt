@@ -12,8 +12,9 @@ class MainFragment : Fragment(R.layout.fragment_chat) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Чаты"
+        APP_ACTIVITY.title = "Chat Shu"
         hideKeyboard()
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
     }
 
 }

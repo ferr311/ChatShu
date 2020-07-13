@@ -1,10 +1,13 @@
 package com.shukhaev.chatshu.ui.fragments.single_chat
 
 import android.view.View
+import android.widget.AbsListView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.database.DatabaseReference
 import com.shukhaev.chatshu.R
+import com.shukhaev.chatshu.database.*
 import com.shukhaev.chatshu.models.CommonModel
 import com.shukhaev.chatshu.models.UserModel
 import com.shukhaev.chatshu.ui.fragments.BaseFragment
@@ -20,18 +23,27 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mReceivingUser: UserModel
     private lateinit var mToolbarInfo: View
     private lateinit var mRefUser: DatabaseReference
-
     private lateinit var mRefMessages: DatabaseReference
     private lateinit var mAdapter: SingleChatAdapter
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mMessagesListener: AppValueEventListener
-    private var mListMessages = emptyList<CommonModel>()
+    private lateinit var mMessagesListener: AppChildEventListener
+    private var mCountMessages = 15
+    private var mIsScrolling = false
+    private var mSmoothScrollToPosition = true
+    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var mLayoutManager: LinearLayoutManager
 
     override fun onResume() {
         super.onResume()
+        initFields()
         hideKeyboard()
         initToolbar()
         initRecyclerView()
+    }
+
+    private fun initFields() {
+        mSwipeRefreshLayout = single_chat_swipeRefresh
+        mLayoutManager = LinearLayoutManager(this.context)
     }
 
     private fun initRecyclerView() {
@@ -39,12 +51,51 @@ class SingleChatFragment(private val contact: CommonModel) :
         mAdapter = SingleChatAdapter()
         mRefMessages = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID).child(contact.id)
         mRecyclerView.adapter = mAdapter
-        mMessagesListener = AppValueEventListener { dataSnapshot ->
-            mListMessages = dataSnapshot.children.map { it.getCommonModel() }
-            mAdapter.setList(mListMessages)
-            mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)    //автопрокрутка ресайклера
+        mRecyclerView.layoutManager = mLayoutManager
+        mRecyclerView.setHasFixedSize(true)
+        mRecyclerView.isNestedScrollingEnabled = false
+
+        mMessagesListener = AppChildEventListener {
+            val message = it.getCommonModel()
+            if (mSmoothScrollToPosition) {
+                mAdapter.addItemToBottom(message) {
+                    mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)    //автопрокрутка ресайклера
+                }
+            } else {
+                mAdapter.addItemToTop(message) {
+                    mSwipeRefreshLayout.isRefreshing = false
+                }
+            }
         }
-        mRefMessages.addValueEventListener(mMessagesListener)
+
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
+
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (mIsScrolling && dy < 0 && mLayoutManager.findFirstVisibleItemPosition() <= 3) {
+                    updateData()
+                }
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    mIsScrolling = true
+                }
+
+            }
+        })
+
+        mSwipeRefreshLayout.setOnRefreshListener { updateData() }
+    }
+
+    private fun updateData() {
+        mSmoothScrollToPosition = false
+        mIsScrolling = false
+        mCountMessages += 10
+        mRefMessages.removeEventListener(mMessagesListener)
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
     }
 
     private fun initToolbar() {
@@ -55,14 +106,21 @@ class SingleChatFragment(private val contact: CommonModel) :
             updateInfoToolbar()
         }
 
-        mRefUser = REF_DATABASE_ROOT.child(NODE_USERS).child(contact.id)
+        mRefUser = REF_DATABASE_ROOT.child(
+            NODE_USERS
+        ).child(contact.id)
         mRefUser.addValueEventListener(mListenerInfoToolbar)
 
         single_chat_btn_send.setOnClickListener {
+            mSmoothScrollToPosition = true
             val message = single_chat_input_message.text.toString()
             if (message.isEmpty()) {
                 showToast(getString(R.string.error_message_is_empty))
-            } else sendMessage(message, contact.id, TYPE_TEXT) {
+            } else sendMessage(
+                message,
+                contact.id,
+                TYPE_TEXT
+            ) {
                 single_chat_input_message.setText("")
             }
         }
@@ -84,5 +142,4 @@ class SingleChatFragment(private val contact: CommonModel) :
         mRefUser.removeEventListener(mListenerInfoToolbar)
         mRefMessages.removeEventListener(mMessagesListener)
     }
-
 }

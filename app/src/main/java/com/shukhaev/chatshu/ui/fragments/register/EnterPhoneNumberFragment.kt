@@ -1,13 +1,11 @@
-package com.shukhaev.chatshu.ui.fragments
+package com.shukhaev.chatshu.ui.fragments.register
 
 import androidx.fragment.app.Fragment
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
-import com.shukhaev.chatshu.MainActivity
 import com.shukhaev.chatshu.R
-import com.shukhaev.chatshu.activities.RegisterActivity
+import com.shukhaev.chatshu.database.AUTH
 import com.shukhaev.chatshu.utils.*
 import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 import java.util.concurrent.TimeUnit
@@ -24,12 +22,13 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
 
     override fun onStart() {
         super.onStart()
+        //Коллбэк возвращает результат верификации
         mCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 AUTH.signInWithCredential(credential).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         showToast("Добро пожаловать")
-                        (activity as RegisterActivity).replaceActivity(MainActivity())
+                        restartActivity()
                     } else {
                         showToast(task.exception?.message.toString())
                     }
@@ -41,7 +40,12 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
             }
 
             override fun onCodeSent(id: String, token: PhoneAuthProvider.ForceResendingToken) {
-                replaceFragment(EnterCodeFragment(mPhoneNumber, id))
+                replaceFragment(
+                    EnterCodeFragment(
+                        mPhoneNumber,
+                        id
+                    )
+                )
             }
 
         }
@@ -59,7 +63,7 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
     private fun authUser() {
         mPhoneNumber = register_input_phone_number.text.toString()
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            mPhoneNumber, 60, TimeUnit.SECONDS, activity as RegisterActivity, mCallback
+            mPhoneNumber, 60, TimeUnit.SECONDS, APP_ACTIVITY, mCallback
         )
     }
 }

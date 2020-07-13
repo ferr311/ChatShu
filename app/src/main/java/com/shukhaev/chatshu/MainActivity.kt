@@ -5,9 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.shukhaev.chatshu.activities.RegisterActivity
+import com.shukhaev.chatshu.database.AUTH
+import com.shukhaev.chatshu.database.initFirebase
+import com.shukhaev.chatshu.database.initUser
 import com.shukhaev.chatshu.databinding.ActivityMainBinding
 import com.shukhaev.chatshu.ui.fragments.MainFragment
+import com.shukhaev.chatshu.ui.fragments.register.EnterPhoneNumberFragment
 import com.shukhaev.chatshu.ui.objects.AppDrawer
 import com.shukhaev.chatshu.utils.*
 import kotlinx.coroutines.CoroutineScope
@@ -47,12 +50,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
+        setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
-            setSupportActionBar(mToolbar)
             mAppDrawer.create()
             replaceFragment(MainFragment(), false)
         } else {
-            replaceActivity(RegisterActivity())
+            replaceFragment(EnterPhoneNumberFragment(),false)
         }
     }
 

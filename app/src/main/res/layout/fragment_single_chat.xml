@@ -6,17 +6,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.single_chat.SingleChatFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/single_chat_recycler"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/single_chat_swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/single_chat_input_message"
-        android:layout_marginBottom="@dimen/app_small_margin"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/message_item"
-        android:background="@color/colorChatBackground"/>
+        app:layout_constraintBottom_toTopOf="@id/single_chat_input_message">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/single_chat_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/app_small_margin"
+            tools:listitem="@layout/message_item"
+            android:background="@color/colorChatBackground"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <EditText
         android:id="@+id/single_chat_input_message"
@@ -45,7 +52,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/single_chat_input_message"
         app:layout_constraintStart_toEndOf="@id/single_chat_input_message"
         app:layout_constraintTop_toTopOf="@id/single_chat_input_message" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

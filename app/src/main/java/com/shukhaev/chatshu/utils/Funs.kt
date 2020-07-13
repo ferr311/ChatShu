@@ -6,9 +6,10 @@ import android.provider.ContactsContract
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.shukhaev.chatshu.MainActivity
 import com.shukhaev.chatshu.R
+import com.shukhaev.chatshu.database.updatePhonesToDatabase
 import com.shukhaev.chatshu.models.CommonModel
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
@@ -19,33 +20,25 @@ fun showToast(message: String) {
     Toast.makeText(APP_ACTIVITY, message, Toast.LENGTH_SHORT).show()
 }
 
-fun AppCompatActivity.replaceActivity(activity: AppCompatActivity) {
+fun restartActivity() {
     //Запускает активити из активити
-    val intent = Intent(this, activity::class.java)
-    startActivity(intent)
-    this.finish()
+    val intent = Intent(APP_ACTIVITY, MainActivity::class.java)
+    APP_ACTIVITY.startActivity(intent)
+    APP_ACTIVITY.finish()
 }
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack: Boolean = true) {
+fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
     //Запускает фрагменты из активити
     if (addStack) {
-        supportFragmentManager.beginTransaction()
+        APP_ACTIVITY.supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .replace(R.id.data_container, fragment)
             .commit()
     } else {
-        supportFragmentManager.beginTransaction()
+        APP_ACTIVITY.supportFragmentManager.beginTransaction()
             .replace(R.id.data_container, fragment)
             .commit()
     }
-}
-
-fun Fragment.replaceFragment(fragment: Fragment) {
-    //расширение для Фрагментов. устанавливает фрагменты
-    this.fragmentManager?.beginTransaction()
-        ?.addToBackStack(null)
-        ?.replace(R.id.data_container, fragment)
-        ?.commit()
 }
 
 fun hideKeyboard() {
