@@ -2,7 +2,9 @@ package com.shukhaev.chatshu.utils
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.provider.ContactsContract
+import android.provider.OpenableColumns
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
@@ -12,6 +14,7 @@ import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.database.updatePhonesToDatabase
 import com.shukhaev.chatshu.models.CommonModel
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -86,8 +89,24 @@ fun initContacts() {
 }
 
 //форматирует время сервера Фаербэйс к стандартному виду
- fun String.asTime(): String {
+fun String.asTime(): String {
     val time = Date(this.toLong())
     val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
     return timeFormat.format(time)
+}
+
+fun getFileNameFromUri(uri: Uri): String {
+    var result = ""
+    val cursor = APP_ACTIVITY.contentResolver
+        .query(uri, null, null, null, null)
+    try {
+        if (cursor != null&&cursor.moveToFirst()) {
+            result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+        }
+    } catch (e:Exception) {
+        showToast(e.message.toString())
+    }finally {
+        cursor?.close()
+        return result
+    }
 }

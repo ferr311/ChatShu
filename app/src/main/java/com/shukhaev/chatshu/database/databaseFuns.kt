@@ -18,20 +18,16 @@ import java.util.ArrayList
 
 fun initFirebase() {
     //Инициализация базы данных
-    AUTH =
-        FirebaseAuth.getInstance()
+    AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
-    USER =
-        UserModel()
+    USER = UserModel()
     CURRENT_UID = AUTH.currentUser?.uid.toString()
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference
 }
 
 inline fun putUrlToDatabase(url: String, crossinline function: () -> Unit) {
     //функция высшего порядка, отправляет URL в базу данных
-    REF_DATABASE_ROOT.child(NODE_USERS).child(
-        CURRENT_UID
-    ).child(CHILD_PHOTO_URL).setValue(url)
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_PHOTO_URL).setValue(url)
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 }
@@ -52,13 +48,9 @@ inline fun putFileToStorage(uri: Uri, path: StorageReference, crossinline functi
 
 inline fun initUser(crossinline function: () -> Unit) {
     //функция высшего порядка, инициализация текущей модели юзера
-    REF_DATABASE_ROOT.child(NODE_USERS).child(
-        CURRENT_UID
-    )
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
         .addListenerForSingleValueEvent(AppValueEventListener {
-            USER =
-                it.getValue(UserModel::class.java)
-                    ?: UserModel()
+            USER = it.getValue(UserModel::class.java)?: UserModel()
             if (USER.username.isEmpty()) {
                 USER.username =
                     CURRENT_UID
@@ -75,9 +67,7 @@ fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
                 it.children.forEach { snapshot ->
                     arrayContacts.forEach { contact ->
                         if (snapshot.key == contact.phone) {
-                            REF_DATABASE_ROOT.child(
-                                NODE_PHONES_CONTACTS
-                            ).child(CURRENT_UID)
+                            REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
                                 .child(snapshot.value.toString())
                                 .child(CHILD_ID)
                                 .setValue(snapshot.value.toString())
@@ -87,9 +77,7 @@ fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
                                     )
                                 }
 
-                            REF_DATABASE_ROOT.child(
-                                NODE_PHONES_CONTACTS
-                            ).child(CURRENT_UID)
+                            REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
                                 .child(snapshot.value.toString())
                                 .child(CHILD_FULLNAME)
                                 .setValue(contact.fullname)
@@ -119,13 +107,11 @@ fun sendMessage(message: String, receivingUserID: String, typeText: String, func
     val messageKey = REF_DATABASE_ROOT.child(refDialogUser).push().key
 
     val mapMessage = hashMapOf<String, Any>()
-    mapMessage[CHILD_FROM] =
-        CURRENT_UID
+    mapMessage[CHILD_FROM] = CURRENT_UID
     mapMessage[CHILD_TYPE] = typeText
     mapMessage[CHILD_TEXT] = message
     mapMessage[CHILD_ID] = messageKey.toString()
-    mapMessage[CHILD_TIMESTAMP] =
-        ServerValue.TIMESTAMP
+    mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
 
     val mapDialog = hashMapOf<String, Any>()
     mapDialog["$refDialogUser/$messageKey"] = mapMessage
@@ -138,9 +124,8 @@ fun sendMessage(message: String, receivingUserID: String, typeText: String, func
 
 fun updateCurrentUsername(newUserName: String) {
     //обновление username в базе данных у текущего пользователя
-    REF_DATABASE_ROOT.child(NODE_USERS).child(
-        CURRENT_UID
-    ).child(CHILD_USERNAME).setValue(newUserName)
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_USERNAME)
+        .setValue(newUserName)
         .addOnCompleteListener {
             if (it.isSuccessful) {
                 deleteOldUsername(newUserName)
@@ -157,9 +142,7 @@ fun updateCurrentUsername(newUserName: String) {
 
 private fun deleteOldUsername(newUserName: String) {
     //удаление старого username в базе данных
-    REF_DATABASE_ROOT.child(NODE_USERNAMES).child(
-        USER.username
-    ).removeValue()
+    REF_DATABASE_ROOT.child(NODE_USERNAMES).child(USER.username).removeValue()
         .addOnSuccessListener {
             showToast(
                 APP_ACTIVITY.getString(
@@ -173,9 +156,7 @@ private fun deleteOldUsername(newUserName: String) {
 }
 
 fun setBioToDatabase(newBio: String) {
-    REF_DATABASE_ROOT.child(NODE_USERS).child(
-        CURRENT_UID
-    ).child(CHILD_BIO).setValue(newBio)
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_BIO).setValue(newBio)
         .addOnSuccessListener {
             showToast(
                 APP_ACTIVITY.getString(
@@ -189,11 +170,7 @@ fun setBioToDatabase(newBio: String) {
 }
 
 fun setNameToDatabase(fullname: String) {
-    REF_DATABASE_ROOT.child(
-        NODE_USERS
-    ).child(CURRENT_UID).child(
-        CHILD_FULLNAME
-    ).setValue(fullname)
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULLNAME).setValue(fullname)
         .addOnSuccessListener {
             showToast(
                 APP_ACTIVITY.getString(
@@ -211,19 +188,19 @@ fun sendMessageAsFile(
     receivingUserID: String,
     fileUrl: String,
     messageKey: String,
-    messageType: String
+    messageType: String,
+    fileName: String
 ) {
     val refDialogUser = "$NODE_MESSAGES/$CURRENT_UID/$receivingUserID"
     val refDialogReceivingUser = "$NODE_MESSAGES/$receivingUserID/$CURRENT_UID"
 
     val mapMessage = hashMapOf<String, Any>()
-    mapMessage[CHILD_FROM] =
-        CURRENT_UID
+    mapMessage[CHILD_FROM] = CURRENT_UID
     mapMessage[CHILD_TYPE] = messageType
     mapMessage[CHILD_ID] = messageKey
-    mapMessage[CHILD_TIMESTAMP] =
-        ServerValue.TIMESTAMP
+    mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
     mapMessage[CHILD_FILE_URL] = fileUrl
+    mapMessage[CHILD_TEXT] = fileName
 
     val mapDialog = hashMapOf<String, Any>()
     mapDialog["$refDialogUser/$messageKey"] = mapMessage
@@ -238,10 +215,14 @@ fun getMessageKey(id: String): String =
         .child(NODE_MESSAGES)
         .child(CURRENT_UID).child(id).push().key.toString()
 
-fun uploadFileToStorage(uri: Uri, messageKey: String, receivedID: String, messageType: String) {
-    val path = REF_STORAGE_ROOT.child(
-        FOLDER_FILES
-    ).child(messageKey)
+fun uploadFileToStorage(
+    uri: Uri,
+    messageKey: String,
+    receivedID: String,
+    messageType: String,
+    fileName: String = ""
+) {
+    val path = REF_STORAGE_ROOT.child(FOLDER_FILES).child(messageKey)
 
     putFileToStorage(uri, path) {
         getUrlFromStorage(path) {
@@ -249,7 +230,8 @@ fun uploadFileToStorage(uri: Uri, messageKey: String, receivedID: String, messag
                 receivedID,
                 it,
                 messageKey,
-                messageType
+                messageType,
+                fileName
             )
         }
     }
