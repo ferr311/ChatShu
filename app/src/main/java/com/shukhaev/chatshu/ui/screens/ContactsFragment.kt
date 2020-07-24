@@ -1,4 +1,4 @@
-package com.shukhaev.chatshu.ui.fragments
+package com.shukhaev.chatshu.ui.screens
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.database.*
 import com.shukhaev.chatshu.models.CommonModel
-import com.shukhaev.chatshu.ui.fragments.single_chat.SingleChatFragment
+import com.shukhaev.chatshu.ui.screens.single_chat.SingleChatFragment
 import com.shukhaev.chatshu.utils.*
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.contact_item.view.*

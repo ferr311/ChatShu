@@ -1,4 +1,4 @@
-package com.shukhaev.chatshu.ui.fragments
+package com.shukhaev.chatshu.ui.screens
 
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.database.*

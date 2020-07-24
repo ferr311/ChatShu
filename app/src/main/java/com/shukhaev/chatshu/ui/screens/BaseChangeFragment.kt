@@ -1,11 +1,9 @@
-package com.shukhaev.chatshu.ui.fragments
+package com.shukhaev.chatshu.ui.screens
 
-import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.shukhaev.chatshu.MainActivity
 import com.shukhaev.chatshu.R
-import com.shukhaev.chatshu.utils.APP_ACTIVITY
 import com.shukhaev.chatshu.utils.hideKeyboard
 
 

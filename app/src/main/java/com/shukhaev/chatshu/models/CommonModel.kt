@@ -14,10 +14,12 @@ data class CommonModel(
     var state: String = "",
     var photoUrl: String = "empty",
 
+
     //поля сообщения
     var text: String = "",
     var type: String = "",
     var from: String = "",
+    var fileUrl: String = "empty",
     var timeStamp: Any = ""
 
 

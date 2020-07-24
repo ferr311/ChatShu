@@ -9,8 +9,8 @@ import com.shukhaev.chatshu.database.AUTH
 import com.shukhaev.chatshu.database.initFirebase
 import com.shukhaev.chatshu.database.initUser
 import com.shukhaev.chatshu.databinding.ActivityMainBinding
-import com.shukhaev.chatshu.ui.fragments.MainFragment
-import com.shukhaev.chatshu.ui.fragments.register.EnterPhoneNumberFragment
+import com.shukhaev.chatshu.ui.screens.MainFragment
+import com.shukhaev.chatshu.ui.screens.register.EnterPhoneNumberFragment
 import com.shukhaev.chatshu.ui.objects.AppDrawer
 import com.shukhaev.chatshu.utils.*
 import kotlinx.coroutines.CoroutineScope

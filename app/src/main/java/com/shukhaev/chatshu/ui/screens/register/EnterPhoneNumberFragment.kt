@@ -1,4 +1,4 @@
-package com.shukhaev.chatshu.ui.fragments.register
+package com.shukhaev.chatshu.ui.screens.register
 
 import androidx.fragment.app.Fragment
 import com.google.firebase.FirebaseException
