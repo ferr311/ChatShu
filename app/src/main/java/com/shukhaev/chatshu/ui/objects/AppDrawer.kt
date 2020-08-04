@@ -17,7 +17,7 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.ui.screens.ContactsFragment
-import com.shukhaev.chatshu.ui.screens.SettingsFragment
+import com.shukhaev.chatshu.ui.screens.settings.SettingsFragment
 import com.shukhaev.chatshu.utils.APP_ACTIVITY
 import com.shukhaev.chatshu.database.USER
 import com.shukhaev.chatshu.utils.downloadAndSetImage

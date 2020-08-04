@@ -20,7 +20,9 @@ data class CommonModel(
     var type: String = "",
     var from: String = "",
     var fileUrl: String = "empty",
-    var timeStamp: Any = ""
+    var timeStamp: Any = "",
+
+    var lasrMessage:String =  ""
 
 
 ) {

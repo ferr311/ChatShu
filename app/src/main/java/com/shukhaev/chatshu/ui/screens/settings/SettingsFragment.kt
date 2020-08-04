@@ -1,4 +1,4 @@
-package com.shukhaev.chatshu.ui.screens
+package com.shukhaev.chatshu.ui.screens.settings
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.database.*
+import com.shukhaev.chatshu.ui.screens.BaseFragment
 import com.shukhaev.chatshu.utils.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView

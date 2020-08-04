@@ -9,7 +9,7 @@ import com.shukhaev.chatshu.database.AUTH
 import com.shukhaev.chatshu.database.initFirebase
 import com.shukhaev.chatshu.database.initUser
 import com.shukhaev.chatshu.databinding.ActivityMainBinding
-import com.shukhaev.chatshu.ui.screens.MainFragment
+import com.shukhaev.chatshu.ui.screens.main_list.MainListFragment
 import com.shukhaev.chatshu.ui.screens.register.EnterPhoneNumberFragment
 import com.shukhaev.chatshu.ui.objects.AppDrawer
 import com.shukhaev.chatshu.utils.*
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
             mAppDrawer.create()
-            replaceFragment(MainFragment(), false)
+            replaceFragment(MainListFragment(), false)
         } else {
             replaceFragment(EnterPhoneNumberFragment(),false)
         }

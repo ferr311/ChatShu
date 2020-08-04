@@ -1,8 +1,6 @@
 package com.shukhaev.chatshu.ui.screens
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -11,6 +9,7 @@ import com.google.firebase.database.DatabaseReference
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.database.*
 import com.shukhaev.chatshu.models.CommonModel
+import com.shukhaev.chatshu.ui.screens.settings.ChangeNameFragment
 import com.shukhaev.chatshu.ui.screens.single_chat.SingleChatFragment
 import com.shukhaev.chatshu.utils.*
 import de.hdodenhof.circleimageview.CircleImageView

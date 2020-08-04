@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.widget.AbsListView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +18,7 @@ import com.shukhaev.chatshu.models.CommonModel
 import com.shukhaev.chatshu.models.UserModel
 import com.shukhaev.chatshu.ui.screens.BaseFragment
 import com.shukhaev.chatshu.ui.message_recycler_view.views.AppViewFactory
+import com.shukhaev.chatshu.ui.screens.settings.ChangeNameFragment
 import com.shukhaev.chatshu.utils.*
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -58,6 +58,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initFields() {
+        setHasOptionsMenu(true)
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_choice)
         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         mAppVoiceRecorder = AppVoiceRecorder()
@@ -84,8 +85,7 @@ class SingleChatFragment(private val contact: CommonModel) :
                     if (event.action == MotionEvent.ACTION_DOWN) {
 
                         single_chat_input_message.setText("Запись...")
-                        single_chat_btn_voice.setColorFilter(
-                            ContextCompat.getColor(
+                        single_chat_btn_voice.setColorFilter(ContextCompat.getColor(
                                 APP_ACTIVITY,
                                 R.color.md_red_900
                             )
@@ -206,6 +206,7 @@ class SingleChatFragment(private val contact: CommonModel) :
                 contact.id,
                 TYPE_TEXT
             ) {
+                saveToMainList(contact.id, TYPE_CHAT)
                 single_chat_input_message.setText("")
             }
         }
@@ -255,5 +256,18 @@ class SingleChatFragment(private val contact: CommonModel) :
         super.onDestroyView()
         mAppVoiceRecorder.releaseRecorder()
         mAdapter.onDestroy()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        //создание выпадающего меню
+        activity?.menuInflater?.inflate(R.menu.single_chat_action_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //слушатель выбора пунктов выпадающего меню
+        when (item.itemId) {
+
+        }
+        return true
     }
 }

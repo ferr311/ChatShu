@@ -25,4 +25,6 @@
     <string name="settings_hint_bio">О себе</string>
     <string name="error_message_is_empty">Сообщение не может быть пустым</string>
     <string name="chat_input_message_hint">Введите текст...</string>
+    <string name="single_chat_clearChat">Очистить чат</string>
+    <string name="single_chat_deleteChat">Удалить чат</string>
 </resources>

@@ -1,7 +1,8 @@
-package com.shukhaev.chatshu.ui.screens
+package com.shukhaev.chatshu.ui.screens.settings
 
 import com.shukhaev.chatshu.R
 import com.shukhaev.chatshu.database.*
+import com.shukhaev.chatshu.ui.screens.BaseChangeFragment
 import com.shukhaev.chatshu.utils.*
 import kotlinx.android.synthetic.main.fragment_change_username.*
 import java.util.*
