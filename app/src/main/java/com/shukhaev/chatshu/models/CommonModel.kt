@@ -22,7 +22,7 @@ data class CommonModel(
     var fileUrl: String = "empty",
     var timeStamp: Any = "",
 
-    var lasrMessage:String =  ""
+    var lastMessage:String =  ""
 
 
 ) {

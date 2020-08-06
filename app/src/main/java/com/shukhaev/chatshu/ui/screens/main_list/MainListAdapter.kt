@@ -35,7 +35,7 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListHolder>() {
 
     override fun onBindViewHolder(holder: MainListHolder, position: Int) {
         holder.itemName.text = listItems[position].fullname
-        holder.itemLastMessage.text = listItems[position].lasrMessage
+        holder.itemLastMessage.text = listItems[position].lastMessage
         holder.itemPhoto.downloadAndSetImage(listItems[position].photoUrl)
     }
 
